@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+body {
+    /* font-family: 'Dancing Script', cursive; */
+    font-family: 'Lato', sans-serif;
+    background-color: var(--dark-color);
+}
+
+:root {
+    --dark-color: #000000;
+    --main-color: #CF0A0A;
+    --second-color: #DC5F00;
+    --light-color: #EEEEEE;
+}
+
+.pasif-page {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.fa-circle-arrow-left,
+.fa-circle-arrow-right {
+    color: var(--main-color);
+}
+
+/* navbar */
+#my-navbar {
+    padding: 10px 0 ;
+}
+#my-navbar-container {
+    background-color: var(--main-color);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+/* header */
+#header {   
+    padding-top: 100px;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.card-body {
+    width: 100%;
+    height: 300px;
+    background-color: var(--dark-color);
+}
+.card-img-top {
+    height: 70vh;
+}
+
+.card-body {
+    overflow: auto;
+}
+
+.card-body::-webkit-scrollbar {
+    background: transparent;
+    width: 4px;
+    height: 4px;
+}
+
+.card-body::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 6px;
+}
+
+.card-body:hover::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+}
+
+.card-body .film-isim {
+    font-size: 30px;
+    color: var(--second-color);
+}
+
+.card-body .puanlama {
+    font-size: 20px;
+    color: var(--second-color);
+}
+
+.card-body .movie-konu {
+    color: var(--light-color);
+}
+
+.movie-col {
+    cursor: pointer;
+}
+
+
+#detail-img img {
+    width: 100%;
+    height: 100%;
+}
+
+#detail-header #datail-title {
+    font-size: 50px;
+    color: var(--second-color);
+}
+
+#detail-overview,
+#detail-slogan {
+    color: var(--light-color);
+}
+
+#datail-vote {
+    border-radius: 50%;
+    font-size: 50px;
+    background-color: var(--second-color);
+    padding: 10px;
+    color: var(--light-color);
+}
+
+#detail-overview,
+#detail-slogan {
+    font-size: 30px;
+}
+
+#detail-tur,
+#datail-back-btn {
+    font-size: 20px;
+    color: var(--second-color);
+}
+
+.detail-cast-card {
+    cursor: pointer;
+}
+
+.fa-reply-all::before {
+    margin-left: 10px;
+}
+
+.cast-card p {
+    color: var(--second-color);
+}
+
+.cast-img {
+    height: 35vh;
+}
+
+.cast-card .card-body {
+    height: 220px;
+}
+
+.anaSayfaDon .btn {
+    font-size: 20px;
+    color: var(--second-color);
+}
+
+
+#tanitim {
+    background-color: var(--main-color);
+}
+
+#tanitim button {
+    background-color: transparent;
+    border: none;
+    color: var(--dark-color);
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    text-shadow: 4px 4px 18px var(--light-color);
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.fa-magnifying-glass::before,
+.fa-triangle-exclamation,
+.fa-circle-exclamation {
+    margin-right: 5px;
+}
+
+#pagination-container #pages {
+    gap: 50px;
+}
+
+/* footer */
+#my-footer-container {
+    width: 100%;
+    background-color: var(--main-color);
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.fa-instagram,
+.fa-twitter,
+.fa-youtube {
+    color: var(--light-color);
+    padding: 0 5px;
+}
+
+
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--dark-color); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--main-color); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--second-color); 
+}
+
+/* mobile */
+@media (max-width :765px) {
+    #tanitim {
+        flex-direction: column!important;
+    }
+
+    .navbar-collapse {
+        text-align: center;
+    }
+
+    .row>* {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #my-footer-container {
+        border-radius: 5px;
+        margin-bottom: 0;
+    }
+
+    #detail-header #datail-title,
+    #detail-header #datail-vote {
+        font-size: 30px;
+    }
+
+    #detail-overview,
+    #detail-slogan {
+        font-size: 20px;
+    }
+
+    #detail-tur {
+        font-size: 15px;
+    }
+
+    #detail-img{
+        height: 50vh;
+    }
+
+    .cast-img {
+        height: 35vh;
+        object-fit:contain
+    }
+
+
+    
+/* 
+    #header {
+        background-color: #191919;
+    } */
+
+    /* .col {
+        border-bottom: 1px solid #EEEEEE;
+    } */
+
+}
