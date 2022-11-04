@@ -49,9 +49,6 @@ body {
     height: 70vh;
 }
 
-.card-body {
-    overflow: auto;
-}
 
 .card-body::-webkit-scrollbar {
     background: transparent;
@@ -129,6 +126,14 @@ body {
     cursor: pointer;
 }
 
+.detail-overview {
+    /* height: 50vh; */
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
 .fa-reply-all::before {
     margin-left: 10px;
 }
@@ -190,6 +195,14 @@ body {
     padding: 0 5px;
 }
 
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
 
 
 /* scrollbar */
@@ -247,19 +260,25 @@ body {
     }
 
     .cast-img {
-        height: 35vh;
-        object-fit:contain
+        height: 100%;
+        width: 35vw;
     }
 
+    .cast-card {
+        height: 30vh;
+        display: flex;
+        flex-direction: row;
+    }
 
-    
-/* 
-    #header {
-        background-color: #191919;
-    } */
+    .cast-card .card-body {
+        height: 100%;
+    }
 
-    /* .col {
-        border-bottom: 1px solid #EEEEEE;
-    } */
-
+    .line-clamp {
+        -webkit-line-clamp: 3;
+    }   
 }
+
+
+
+
