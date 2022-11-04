@@ -118,7 +118,8 @@ const moviePage = async (sayfa) => {
                             <p class="card-text"><small class="text-muted">
                             Gösterim Tarihi: ${gosterimTarihi}
                             </small></p>
-                            <p class="card-text movie-konu">${konu}</p>
+                            <p class="card-text movie-konu line-clamp">${konu}</p>
+                            <p class="card-text movie-konu line-clamp">Devamı...</p>
                         </div>
                     </div>
                 </div>
@@ -405,7 +406,7 @@ const getActDetails = async (multiName) => {
                         <img src="${allPoster}">
                     </div>
                     <div id="datail-body class="text-center mb-3"">
-                        <p id="detail-overview" class="text-center mb-3">${allActOverview}</p>
+                        <p id="detail-overview" class="text-center mb-3 detail-overview">${allActOverview}</p>
                         <p id="detail-slogan" class="text-center mb-3">Gösterim Tarihi: ${allDate}</p>
                     </div>
             `;
@@ -425,6 +426,12 @@ const getActDetails = async (multiName) => {
         </div>
     `;
     atcDis.insertAdjacentHTML("beforeend",anaSayfaDon);
+
+    let anaSayfaDonBtn = document.querySelector(".anaSayfaDon button");
+
+    anaSayfaDonBtn.addEventListener("click", ()=> {
+        moviePage(mainPage);
+    });
 };
 
 
