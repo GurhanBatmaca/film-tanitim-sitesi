@@ -25,11 +25,11 @@ body {
 
 /* navbar */
 #my-navbar {
-    padding: 10px 0 ;
+    padding: 15px 0 ;
 }
 #my-navbar-container {
     background-color: var(--main-color);
-    padding: 6px;
+    padding: 10px;
     border-radius: 5px;
 }
 

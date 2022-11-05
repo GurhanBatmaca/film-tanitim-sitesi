@@ -1,5 +1,5 @@
 const movieContainer = document.querySelector("#movie-container");
-const tanitimContainer = document.querySelector("#tanitim-container");
+// const tanitimContainer = document.querySelector("#tanitim-container");
 const paginationContainer = document.querySelector("#pagination-container");
 const footerTime = document.querySelector("#copyright span");
 const errorsContainer = document.querySelector("#errors-container");
@@ -7,10 +7,26 @@ let movieOriginalTitle,movieTitle,konu,gosterimTarihi,poster,puan,id,actImg,movi
 let mainPage = 1;
 let mainUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
 
+document.querySelector("#get-vizyon-btn").addEventListener("click", () => {
+    getVizyonFilmler();
+});
+
+document.querySelector("#get-populer-btn").addEventListener("click", () => {
+    getPopulerFilmler();
+});
+
+document.querySelector("#get-cok-oylanan-btn").addEventListener("click", () => {
+    getFazlaOyAlanFilmler();
+});
+
+document.querySelector("#get-yakinda-btn").addEventListener("click", () => {
+    yakindaCikacakFilmler();
+});
+
 const moviePage = async (sayfa) => {
     movieContainer.innerHTML ="";
     paginationContainer.innerHTML ="";
-    tanitimContainer.innerHTML ="";
+
     try {
         const page = await fetch(`${mainUrl}${sayfa}`);
         const request = await page.json();
@@ -23,65 +39,51 @@ const moviePage = async (sayfa) => {
         };
         let results = request.results;
 
-        let tanitimDis = `
-        <div id="tanitim" class="list-group flex-row justify-content-around text-center">
-            <button id="vizyondakiFilmler"  type="button" class="btn list-group-item active-page">Vizyondaki Filmler</button>
-            <button id="populerFilmler"  type="button" class="btn list-group-item">Popüler Filmler</button>
-            <button id="fazlaOyAlanFilmler"  type="button" class="btn list-group-item">En Fazla Oy Alanlar</button>
-            <button id="yakindaCikacakFilmler"  type="button" class="btn list-group-item">Yakında Çıkacaklar</button>
-            <form class="d-flex p-2">
-                <input id="movieInput" class="form-control me-2" type="search" placeholder="Film adı..." aria-label="Search">
-                <button id="btnMovieForm" class="btn btn-outline-success" type="submit">
-                    <i class="fa-solid fa-magnifying-glass">ARA</i>
-                </button>
-          </form>
-        </div>
-        `;
-        tanitimContainer.insertAdjacentHTML("beforeend",tanitimDis);
+        // let tanitimDis = `
+        // <div id="tanitim" class="list-group flex-row justify-content-around text-center">
+        //     <button id="vizyondakiFilmler"  type="button" class="btn list-group-item active-page">Vizyondaki Filmler</button>
+        //     <button id="populerFilmler"  type="button" class="btn list-group-item">Popüler Filmler</button>
+        //     <button id="fazlaOyAlanFilmler"  type="button" class="btn list-group-item">En Fazla Oy Alanlar</button>
+        //     <button id="yakindaCikacakFilmler"  type="button" class="btn list-group-item">Yakında Çıkacaklar</button>
+        //     <form class="d-flex p-2">
+        //         <input id="movieInput" class="form-control me-2" type="search" placeholder="Film adı..." aria-label="Search">
+        //         <button id="btnMovieForm" class="btn btn-outline-success" type="submit">
+        //             <i class="fa-solid fa-magnifying-glass">ARA</i>
+        //         </button>
+        //   </form>
+        // </div>
+        // `;
+        // tanitimContainer.insertAdjacentHTML("beforeend",tanitimDis);
 
-        let movieInput = document.querySelector("#movieInput");
-        let btnMovieForm = document.querySelector("#btnMovieForm");
+        // let movieInput = document.querySelector("#movieInput");
+        // let btnMovieForm = document.querySelector("#btnMovieForm");
 
-        // tanıtım arama kısmı
-        btnMovieForm.addEventListener("click", (e) => {
-            e.preventDefault();
-            let inputValue = movieInput.value;
-            try {
-                if(inputValue == "") {
-                    throw new Error("Arama kısmı boş bırakılamaz!")
-                }
-                searchMovie(inputValue);
-                // console.log(inputValue);
-            }
-            catch(err) {
-                console.log(err);
-                let errorsDis = `
-                <div class="alert alert-danger" role="alert">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                    ${err.message}
-                </div>
-                `;
-                errorsContainer.insertAdjacentHTML("beforeend",errorsDis);
-                setTimeout(clearErrorMessage,4000);
-            }
+        // // tanıtım arama kısmı
+        // btnMovieForm.addEventListener("click", (e) => {
+        //     e.preventDefault();
+        //     let inputValue = movieInput.value;
+        //     try {
+        //         if(inputValue == "") {
+        //             throw new Error("Arama kısmı boş bırakılamaz!")
+        //         }
+        //         searchMovie(inputValue);
+        //         // console.log(inputValue);
+        //     }
+        //     catch(err) {
+        //         console.log(err);
+        //         let errorsDis = `
+        //         <div class="alert alert-danger" role="alert">
+        //         <i class="fa-solid fa-circle-exclamation"></i>
+        //             ${err.message}
+        //         </div>
+        //         `;
+        //         errorsContainer.insertAdjacentHTML("beforeend",errorsDis);
+        //         setTimeout(clearErrorMessage,4000);
+        //     }
             
-        });
+        // });
 
-        document.querySelector("#vizyondakiFilmler").addEventListener("click", () => {
-            getVizyonFilmler();
-        });
-        
-        document.querySelector("#populerFilmler").addEventListener("click", () => {
-            getPopulerFilmler();
-        });
 
-        document.querySelector("#fazlaOyAlanFilmler").addEventListener("click", () => {
-            getFazlaOyAlanFilmler();
-        });
-
-        document.querySelector("#yakindaCikacakFilmler").addEventListener("click", () => {
-            yakindaCikacakFilmler();
-        });
 
         // filmlerin gösterildiği kısım
         let moviesDis = `
@@ -229,7 +231,6 @@ const movieDetails = async (movieId) => {
         let slogan = data.tagline;
 
         movieContainer.innerHTML = "";
-        tanitimContainer.innerHTML = "";
         paginationContainer.innerHTML = "";
 
         let movieDis = `
@@ -321,7 +322,7 @@ const movieDetails = async (movieId) => {
 
         }
         catch(err) {
-            console.log(err.message);
+            console.log(err);
         }
 };
 
