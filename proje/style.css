@@ -163,20 +163,11 @@ body {
     color: var(--second-color);
 }
 
-
-#tanitim {
+#aramaForm button {
     background-color: var(--main-color);
+    color: var(--dark-color);
 }
 
-#tanitim button {
-    background-color: transparent;
-    border: none;
-    color: var(--dark-color);
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
-    text-shadow: 4px 4px 18px var(--light-color);
-    letter-spacing: 1.5px;
-    font-weight: 700;
-}
 
 .fa-magnifying-glass::before,
 .fa-triangle-exclamation,
@@ -215,7 +206,14 @@ body {
     position: fixed;
     bottom: 25px;
     right: 25px;
+}
 
+#pageNo {
+    color: var(--light-color);
+    font-size: 20px;
+}
+#pageNo span {
+    padding: 3px;
 }
 
 
