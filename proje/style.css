@@ -29,13 +29,13 @@ body {
 }
 #my-navbar-container {
     background-color: var(--main-color);
-    padding: 15px;
-    border-radius: 15px;
+    padding: 6px;
+    border-radius: 5px;
 }
 
 /* header */
 #header {   
-    padding-top: 100px;
+    /* padding-top: 100px; */
     width: 100%;
     min-height: 100vh;
 }
