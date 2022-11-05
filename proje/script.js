@@ -2,6 +2,7 @@ const movieContainer = document.querySelector("#movie-container");
 const paginationContainer = document.querySelector("#pagination-container");
 const footerTime = document.querySelector("#copyright span");
 const errorsContainer = document.querySelector("#errors-container");
+const yukariBtn = document.querySelector("#yukariCik");
 let movieOriginalTitle,movieTitle,konu,gosterimTarihi,poster,puan,id,actImg,moviePoster,detailPoster,actMultiName,allActMovies,allActOverview,allPoster,allVote,allDate
 let mainPage = 1;
 let mainUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
@@ -25,6 +26,7 @@ document.querySelector("#get-yakinda-btn").addEventListener("click", () => {
 const moviePage = async (sayfa) => {
     movieContainer.innerHTML ="";
     paginationContainer.innerHTML ="";
+    yukariBtn.click();
 
     try {
         const page = await fetch(`${mainUrl}${sayfa}`);
@@ -98,13 +100,11 @@ const moviePage = async (sayfa) => {
 
         btnNext.addEventListener("click", () => {
             movieContainer.innerHTML = "";
-            tanitimContainer.innerHTML = "";
             paginationContainer.innerHTML = "";
             nextPage();
         });
         btnPrev.addEventListener("click", () => {
             movieContainer.innerHTML = "";
-            tanitimContainer.innerHTML = "";
             paginationContainer.innerHTML = "";
             prevPage();
         });
@@ -211,6 +211,7 @@ const movieDetails = async (movieId) => {
 
         movieContainer.insertAdjacentHTML("beforeend",movieDis)       
         // console.log(data);
+        yukariBtn.click();
 
         let btnDetailsBack = document.querySelector("#datail-back-btn");
 
@@ -263,6 +264,7 @@ const movieDetails = async (movieId) => {
                 elements.addEventListener("click", () => {
                     actMultiName = elements.querySelector(".cast-caracter").textContent.slice(8).split(" ").join("%20");
                     getActDetails(actMultiName);
+                    yukariBtn.click();
                 })
             })
 

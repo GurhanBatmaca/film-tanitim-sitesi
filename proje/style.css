@@ -37,6 +37,10 @@ body {
     border-radius: 5px;
 }
 
+.dropdown-menu {
+    background-color: var(--main-color);
+}
+
 /* header */
 #header {   
     /* padding-top: 100px; */
@@ -209,8 +213,8 @@ body {
 .go-up a {
     color: var(--second-color);
     position: fixed;
-    bottom: 0;
-    right: 15px;
+    bottom: 25px;
+    right: 25px;
 
 }
 
