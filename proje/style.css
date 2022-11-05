@@ -170,8 +170,8 @@ body {
 
 
 .fa-magnifying-glass::before,
-.fa-triangle-exclamation,
-.fa-circle-exclamation {
+.fa-question,
+.fa-bell {
     margin-right: 5px;
 }
 

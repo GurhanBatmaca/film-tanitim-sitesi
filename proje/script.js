@@ -64,8 +64,8 @@ const moviePage = async (sayfa) => {
             catch(err) {
                 console.log(err);
                 let errorsDis = `
-                    <div class="alert alert-danger" role="alert">
-                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <div class="alert alert-warning" role="alert">
+                    <i class="fa-regular fa-bell"></i>
                         ${err.message}
                     </div>
                 `;
@@ -169,9 +169,12 @@ const moviePage = async (sayfa) => {
     catch(err) {
         console.log(err);
         let errorsDis = `
-        <div class="alert alert-danger" role="alert">
-        <i class="fa-solid fa-triangle-exclamation"></i>
+        <div class="alert alert-warning" role="alert">
+        <i class="fa-solid fa-question"></i>
             ${err.message}
+            <br>
+            <br>
+            Anasayfaya yönlendiriliyorsunuz...
         </div>
         `;
         errorsContainer.insertAdjacentHTML("beforeend",errorsDis);
