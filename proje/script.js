@@ -7,22 +7,21 @@ let movieOriginalTitle,movieTitle,konu,gosterimTarihi,poster,puan,id,actImg,movi
 let mainPage = 1;
 let mainUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
 
+// navbar film btn'ler
 document.querySelector("#get-vizyon-btn").addEventListener("click", () => {
     getVizyonFilmler();
 });
-
 document.querySelector("#get-populer-btn").addEventListener("click", () => {
     getPopulerFilmler();
 });
-
 document.querySelector("#get-cok-oylanan-btn").addEventListener("click", () => {
     getFazlaOyAlanFilmler();
 });
-
 document.querySelector("#get-yakinda-btn").addEventListener("click", () => {
     yakindaCikacakFilmler();
 });
 
+// film sayfaları yüleme
 const moviePage = async (sayfa) => {
     movieContainer.innerHTML ="";
     paginationContainer.innerHTML ="";
@@ -217,7 +216,6 @@ const movieDetails = async (movieId) => {
 
         btnDetailsBack.addEventListener("click", () => {
             movieContainer.innerHTML = "";
-            // console.log(mainUrl);   ilk gelinen sayfanın adresi
             moviePage(mainPage);
         });
 
@@ -267,9 +265,7 @@ const movieDetails = async (movieId) => {
                     yukariBtn.click();
                 })
             })
-
-
-            
+           
         }
         catch(errs) {
             console.log(errs)
