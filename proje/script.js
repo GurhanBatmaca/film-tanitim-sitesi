@@ -1,16 +1,32 @@
 const movieContainer = document.querySelector("#movie-container");
-const tanitimContainer = document.querySelector("#tanitim-container");
 const paginationContainer = document.querySelector("#pagination-container");
 const footerTime = document.querySelector("#copyright span");
 const errorsContainer = document.querySelector("#errors-container");
+const yukariBtn = document.querySelector("#yukariCik");
 let movieOriginalTitle,movieTitle,konu,gosterimTarihi,poster,puan,id,actImg,moviePoster,detailPoster,actMultiName,allActMovies,allActOverview,allPoster,allVote,allDate
 let mainPage = 1;
 let mainUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
 
+// navbar film btn'ler
+document.querySelector("#get-vizyon-btn").addEventListener("click", () => {
+    getVizyonFilmler();
+});
+document.querySelector("#get-populer-btn").addEventListener("click", () => {
+    getPopulerFilmler();
+});
+document.querySelector("#get-cok-oylanan-btn").addEventListener("click", () => {
+    getFazlaOyAlanFilmler();
+});
+document.querySelector("#get-yakinda-btn").addEventListener("click", () => {
+    yakindaCikacakFilmler();
+});
+
+// film sayfaları yüleme
 const moviePage = async (sayfa) => {
     movieContainer.innerHTML ="";
     paginationContainer.innerHTML ="";
-    tanitimContainer.innerHTML ="";
+    yukariBtn.click();
+
     try {
         const page = await fetch(`${mainUrl}${sayfa}`);
         const request = await page.json();
@@ -19,31 +35,24 @@ const moviePage = async (sayfa) => {
         let totalPages = request.total_pages;
         // düzenle
         if(totalPages == 0) {
-            throw new Error("Film adını doğru yazdığınızdan emin olun! Anasayfaya yönlendiriliyorsunuz.");
+            throw new Error("Film adını doğru yazdığınızdan emin olun!");
         };
         let results = request.results;
 
-        let tanitimDis = `
-        <div id="tanitim" class="list-group flex-row justify-content-around text-center">
-            <button id="vizyondakiFilmler"  type="button" class="btn list-group-item active-page">Vizyondaki Filmler</button>
-            <button id="populerFilmler"  type="button" class="btn list-group-item">Popüler Filmler</button>
-            <button id="fazlaOyAlanFilmler"  type="button" class="btn list-group-item">En Fazla Oy Alanlar</button>
-            <button id="yakindaCikacakFilmler"  type="button" class="btn list-group-item">Yakında Çıkacaklar</button>
-            <form class="d-flex p-2">
-                <input id="movieInput" class="form-control me-2" type="search" placeholder="Film adı..." aria-label="Search">
-                <button id="btnMovieForm" class="btn btn-outline-success" type="submit">
-                    <i class="fa-solid fa-magnifying-glass">ARA</i>
+        let aramaDis = `
+            <form id="aramaForm" class="d-flex input-group pb-3">
+                <input id="movie-input" class="form-control me-2" type="search" placeholder="Film adı..." aria-label="Search">
+                <button id="movie-search" class="btn btn-outline" type="submit">
+                <i class="fa-solid fa-magnifying-glass">ARA</i>
                 </button>
-          </form>
-        </div>
+            </form>
         `;
-        tanitimContainer.insertAdjacentHTML("beforeend",tanitimDis);
+        movieContainer.insertAdjacentHTML("beforeend", aramaDis);
 
-        let movieInput = document.querySelector("#movieInput");
-        let btnMovieForm = document.querySelector("#btnMovieForm");
+        let movieInput = document.querySelector("#movie-input");
+        let movieSearchBtn = document.querySelector("#movie-search");
 
-        // tanıtım arama kısmı
-        btnMovieForm.addEventListener("click", (e) => {
+        movieSearchBtn.addEventListener("click", (e) => {
             e.preventDefault();
             let inputValue = movieInput.value;
             try {
@@ -51,36 +60,18 @@ const moviePage = async (sayfa) => {
                     throw new Error("Arama kısmı boş bırakılamaz!")
                 }
                 searchMovie(inputValue);
-                // console.log(inputValue);
             }
             catch(err) {
                 console.log(err);
                 let errorsDis = `
-                <div class="alert alert-danger" role="alert">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                    ${err.message}
-                </div>
+                    <div class="alert alert-warning" role="alert">
+                    <i class="fa-regular fa-bell"></i>
+                        ${err.message}
+                    </div>
                 `;
                 errorsContainer.insertAdjacentHTML("beforeend",errorsDis);
-                setTimeout(clearErrorMessage,4000);
+                setTimeout(clearErrorMessage,3000);
             }
-            
-        });
-
-        document.querySelector("#vizyondakiFilmler").addEventListener("click", () => {
-            getVizyonFilmler();
-        });
-        
-        document.querySelector("#populerFilmler").addEventListener("click", () => {
-            getPopulerFilmler();
-        });
-
-        document.querySelector("#fazlaOyAlanFilmler").addEventListener("click", () => {
-            getFazlaOyAlanFilmler();
-        });
-
-        document.querySelector("#yakindaCikacakFilmler").addEventListener("click", () => {
-            yakindaCikacakFilmler();
         });
 
         // filmlerin gösterildiği kısım
@@ -129,6 +120,15 @@ const moviePage = async (sayfa) => {
             
         });
 
+        let pageShowDis = `
+            <div id="pageNo" class=" text-center">
+                <span id="pageIn">${pageNo}</span>
+                <span>/</span>
+                <span id="pageTot">${totalPages}</span>
+            </div>
+        `;
+        paginationContainer.insertAdjacentHTML("beforeend", pageShowDis);
+
         
         let pagesDis = `
             <div id="pages" class="d-flex justify-content-center mb-3 py-3" role="group" aria-label="Basic example">
@@ -143,13 +143,11 @@ const moviePage = async (sayfa) => {
 
         btnNext.addEventListener("click", () => {
             movieContainer.innerHTML = "";
-            tanitimContainer.innerHTML = "";
             paginationContainer.innerHTML = "";
             nextPage();
         });
         btnPrev.addEventListener("click", () => {
             movieContainer.innerHTML = "";
-            tanitimContainer.innerHTML = "";
             paginationContainer.innerHTML = "";
             prevPage();
         });
@@ -171,15 +169,18 @@ const moviePage = async (sayfa) => {
     catch(err) {
         console.log(err);
         let errorsDis = `
-        <div class="alert alert-danger" role="alert">
-        <i class="fa-solid fa-triangle-exclamation"></i>
+        <div class="alert alert-warning" role="alert">
+        <i class="fa-solid fa-question"></i>
             ${err.message}
+            <br>
+            <br>
+            Anasayfaya yönlendiriliyorsunuz...
         </div>
         `;
         errorsContainer.insertAdjacentHTML("beforeend",errorsDis);
         mainUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
-        setTimeout(moviePage,4000);
-        setTimeout(clearErrorMessage,4000);
+        setTimeout(moviePage,3000);
+        setTimeout(clearErrorMessage,3000);
     }
 
 }
@@ -229,7 +230,6 @@ const movieDetails = async (movieId) => {
         let slogan = data.tagline;
 
         movieContainer.innerHTML = "";
-        tanitimContainer.innerHTML = "";
         paginationContainer.innerHTML = "";
 
         let movieDis = `
@@ -257,12 +257,12 @@ const movieDetails = async (movieId) => {
 
         movieContainer.insertAdjacentHTML("beforeend",movieDis)       
         // console.log(data);
+        yukariBtn.click();
 
         let btnDetailsBack = document.querySelector("#datail-back-btn");
 
         btnDetailsBack.addEventListener("click", () => {
             movieContainer.innerHTML = "";
-            // console.log(mainUrl);   ilk gelinen sayfanın adresi
             moviePage(mainPage);
         });
 
@@ -309,11 +309,10 @@ const movieDetails = async (movieId) => {
                 elements.addEventListener("click", () => {
                     actMultiName = elements.querySelector(".cast-caracter").textContent.slice(8).split(" ").join("%20");
                     getActDetails(actMultiName);
+                    yukariBtn.click();
                 })
             })
-
-
-            
+           
         }
         catch(errs) {
             console.log(errs)
@@ -321,30 +320,34 @@ const movieDetails = async (movieId) => {
 
         }
         catch(err) {
-            console.log(err.message);
+            console.log(err);
         }
 };
 
 const getVizyonFilmler = () => {
     movieContainer.innerHTML = "";
+    mainPage = 1;
     mainUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
     moviePage(mainPage);
 };
 
 const getPopulerFilmler = () => {
     movieContainer.innerHTML = "";
+    mainPage = 1;
     mainUrl = `https://api.themoviedb.org/3/movie/popular?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
     moviePage(mainPage);
 };
 
 const getFazlaOyAlanFilmler = () => {
     movieContainer.innerHTML = "";
+    mainPage = 1;
     mainUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
     moviePage(mainPage);
 };
 
 const yakindaCikacakFilmler = () => {
     movieContainer.innerHTML = "";
+    mainPage = 1;
     mainUrl = `https://api.themoviedb.org/3/movie/upcoming?api_key=ad9a7b0c1f07914b7f151c86d435af36&language=tr&page=`;
     moviePage(mainPage);
 };

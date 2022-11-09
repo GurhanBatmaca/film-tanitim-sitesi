@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <nav id="my-navbar" class="navbar navbar-expand-lg fixed-top">
+    <nav id="my-navbar" class="navbar navbar-expand-lg">
         <div id="my-navbar-container" class="container-lg">
           <a class="navbar-brand" href="#">Anasayfa</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,21 +19,40 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-current="page" href="#">Filmler</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Diziler</a>
-              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-clapperboard"></i>
+                  Filmler 
+                </a>
+                <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                  <li><button type="button" id="get-vizyon-btn" class="dropdown-item btn">Vizyondakiler</button></li>
+                  <li><button type="button" id="get-populer-btn" class="dropdown-item btn">Popüler Filmler</button></li>
+                  <li><button type="button" id="get-cok-oylanan-btn" class="dropdown-item btn">En Çok Oy Alanlar</button></li>
+                  <li><button type="button" id="get-yakinda-btn" class="dropdown-item btn">Yakında Çıkacaklar</button></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-film"></i>
+                  Diziler 
+                </a>
+                <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                  <li><button type="button" class="dropdown-item btn">Dizi</button></li>
+                  <li><button type="button" class="dropdown-item btn">Dizi</button></li>
+                  <li><button type="button" class="dropdown-item btn">Dizi</button></li>
+                  <li><button type="button" class="dropdown-item btn">Dizi</button></li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-person-dots-from-line"></i>
                   Oyuncular 
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item disabled" href="#">Action</a></li>
-                  <li><a class="dropdown-item disabled" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider disabled"></li>
-                  <li><a class="dropdown-item disabled" href="#">Something else here</a></li>
+                <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                  <li><button type="button" class="dropdown-item btn">Oyuncu</button></li>
+                  <li><button type="button" class="dropdown-item btn">Oyuncu</button></li>
+                  <li><button type="button" class="dropdown-item btn">Oyuncu</button></li>
+                  <li><button type="button" class="dropdown-item btn">Oyuncu</button></li>
                 </ul>
               </li>
             </ul>
@@ -49,12 +68,11 @@
                 </div>
               </div>
         </div> -->
+
         
         <div id="degiskenler-container" class="container-lg mb-3">
-            <div id="tanitim-container" class="mb-3  py-2">
 
-            </div>
-            <div id="errors-container" class="container-lg mb-3">
+            <div id="errors-container" class="container-lg">
 
             </div>
             <div id="movie-container" class="mb-3">
@@ -77,6 +95,11 @@
               <h5>Copyright © <span></span> - GÜRHAN BATMACA</h5>
             </div>
         </div>
+
+        <div class="go-up">
+          <a id="yukariCik" href="#my-navbar"><i class="fa-solid fa-circle-chevron-up fa-2x"></i></a>
+        </div>
+
     </footer>
     
 
